@@ -3,6 +3,7 @@ package christmas.Controller;
 import christmas.Model.Order;
 import christmas.View.View;
 import java.util.HashMap;
+import java.util.List;
 
 public class PlannerController {
 
@@ -17,7 +18,7 @@ public class PlannerController {
     public void run() {
         int date = getDate();
         HashMap<String, Integer> orderMenu = getMenu();
-        HashMap<String, String> orderResult = getOrder(orderMenu);
+        HashMap<String, List<String>> orderResult = getOrder(orderMenu);
         View.printOrderResult(date, orderResult);
     }
 
@@ -41,9 +42,9 @@ public class PlannerController {
         }
     }
 
-    private HashMap<String, String> getOrder(HashMap<String, Integer> orderMenu) {
+    private HashMap<String, List<String>> getOrder(HashMap<String, Integer> orderMenu) {
         try {
-            HashMap<String, String> orderResult = Order.order(orderMenu);
+            HashMap<String, List<String>> orderResult = Order.order(orderMenu);
             return orderResult;
         } catch (IllegalArgumentException e) {
             View.printError(e.getMessage());
