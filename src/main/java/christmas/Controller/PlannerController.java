@@ -5,6 +5,7 @@ import christmas.View.View;
 import java.util.HashMap;
 
 public class PlannerController {
+
     private View view;
     private Order order;
 

@@ -3,34 +3,41 @@ package christmas.View;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.Global.Exception;
 import java.io.ByteArrayInputStream;
 import java.util.HashMap;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class InputViewTest {
-    static InputView inputView;
+    static InputView inputView = new InputView();
 
-    @DisplayName("정상_숫자_입력_테스트")
+    @AfterEach
+    void cleanUp() {
+        Console.close();
+    }
+
+    @DisplayName("정상_날짜_입력_테스트")
     @Test
-    void getLegalNumberInput() {
+    void getLegalDateInput() {
         System.setIn(new ByteArrayInputStream("26".getBytes()));
-        int result = inputView.getNumberInput();
+        int result = inputView.getDateInput();
         assertThat(result == 26);
     }
 
-    @DisplayName("비정상_숫자_입력_테스트")
+    @DisplayName("비정상_날짜_입력_테스트")
     @ParameterizedTest()
-    @ValueSource(strings = {"31"})
-    void getIllegalNumberInput(String text) {
+    @ValueSource(strings = {"32", "a", "\n"})
+    void getIllegalDateInput(String text) {
         System.setIn(new ByteArrayInputStream(text.getBytes()));
-        assertThatThrownBy(() -> inputView.getNumberInput())
+        assertThatThrownBy(() -> inputView.getDateInput())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Exception.ILLEGAL_DATE_INPUT);
+                .hasMessage(Exception.ILLEGAL_DATE_INPUT.getPhrase());
     }
 
     @DisplayName("정상_메뉴_입력_테스트")
@@ -45,13 +52,12 @@ class InputViewTest {
 
     @DisplayName("비정상_메뉴_입력_테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"타파스-1*", "타파스-19;콜라-10", "타파스19,콜라100", "100", ""})
+    @ValueSource(strings = {"타파스-1*", "타파스-19;콜라-10", "타파스19,콜라100", "100", "\n", "타파스-19,타파스-11"})
     void getIllegalMenuInput(String text) {
         System.setIn(new ByteArrayInputStream("text".getBytes()));
-        HashMap<String, Integer> result = inputView.getMenuInput();
         assertThatThrownBy(() -> inputView.getMenuInput())
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage(Exception.ILLEGAL_ORDER_INPUT);
+                .hasMessage(Exception.ILLEGAL_ORDER_INPUT.getPhrase());
     }
 
 }

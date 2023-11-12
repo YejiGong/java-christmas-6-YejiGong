@@ -12,6 +12,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PlannerControllerTest {
+    
     static View view = new View(new InputView(), new OutputView());
     static Order order = new Order(new EventChecker());
     static OutputStream out;
