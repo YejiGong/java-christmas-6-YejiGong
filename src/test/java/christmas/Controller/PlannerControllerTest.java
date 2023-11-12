@@ -2,6 +2,7 @@ package christmas.Controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.Model.Order;
 import christmas.View.View;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
