@@ -6,10 +6,14 @@ import static christmas.Global.PrintPhrase.VISIT_INPUT_NOTICE;
 import static christmas.Global.ResultPhrase.AFTER_DISCOUNT_ORDER_PRICE;
 import static christmas.Global.ResultPhrase.BEFORE_DISCOUNT_ORDER_PRICE;
 import static christmas.Global.ResultPhrase.BENEFIT_INFORMATION;
-import static christmas.Global.SubResultPhrase.*;
 import static christmas.Global.ResultPhrase.EVENT_BADGE_INFORMATION;
 import static christmas.Global.ResultPhrase.ORDER_MENU;
+import static christmas.Global.ResultPhrase.PRESENT_MENU;
 import static christmas.Global.ResultPhrase.WHOLE_BENEFIT_PRICE;
+import static christmas.Global.SubResultPhrase.BENEFIT_VALUE_NUMBER;
+import static christmas.Global.SubResultPhrase.DISCOUNT_MONEY_OUTPUT;
+import static christmas.Global.SubResultPhrase.MENU_VALUE_NUMBER;
+import static christmas.Global.SubResultPhrase.MONEY_OUTPUT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -60,7 +64,7 @@ class ViewTest {
     @DisplayName("메뉴 입력 받기 테스트")
     @Test
     void getOrderTest() {
-        System.setIn(new ByteArrayInputStream("타파스-1, 제로콜라-1".getBytes()));
+        System.setIn(new ByteArrayInputStream("타파스-1,제로콜라-1".getBytes()));
         HashMap<String, Integer> result = view.getMenuOrder();
         assertThat(result.keySet()).contains("타파스", "제로콜라");
         assertThat(result.get("타파스") == 1);
@@ -74,7 +78,7 @@ class ViewTest {
         HashMap<String, List<String>> result = new HashMap<>();
         result.put(ORDER_MENU.getPhrase(), List.of(MENU_VALUE_NUMBER.getPhrase("티본스테이크", 1)));
         result.put(BEFORE_DISCOUNT_ORDER_PRICE.getPhrase(), List.of(MONEY_OUTPUT.getPhraseMoney(142000)));
-        result.put(BEFORE_DISCOUNT_ORDER_PRICE.getPhrase(), List.of(MENU_VALUE_NUMBER.getPhrase("샴페인", 1)));
+        result.put(PRESENT_MENU.getPhrase(), List.of(MENU_VALUE_NUMBER.getPhrase("샴페인", 1)));
         result.put(BENEFIT_INFORMATION.getPhrase(), List.of(BENEFIT_VALUE_NUMBER.getPhraseMoney("크리스마스 디데이", 1200)));
         result.put(WHOLE_BENEFIT_PRICE.getPhrase(), List.of(DISCOUNT_MONEY_OUTPUT.getPhraseMoney(31246)));
         result.put(AFTER_DISCOUNT_ORDER_PRICE.getPhrase(), List.of(MONEY_OUTPUT.getPhraseMoney(135754)));
@@ -93,7 +97,7 @@ class ViewTest {
                 "-31,246원",
                 "<할인 후 예상 결제 금액>",
                 "135,754원",
-                "<12월 이벤트 배지>"
+                "<12월 이벤트 배지>",
                 "산타"
         );
 

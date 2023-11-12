@@ -16,38 +16,39 @@ public class PlannerController {
     }
 
     public void run() {
+        view.putGreetings();
         int date = getDate();
         HashMap<String, Integer> orderMenu = getMenu();
         HashMap<String, List<String>> orderResult = getOrder(orderMenu);
-        View.printOrderResult(date, orderResult);
+        view.printOrderResult(date, orderResult);
     }
 
     private int getDate() {
         try {
-            int date = View.getVisitDate();
+            int date = view.getVisitDate();
             return date;
         } catch (IllegalArgumentException e) {
-            View.printError(e.getMessage());
+            view.printError(e.getMessage());
             return getDate();
         }
     }
 
     private HashMap<String, Integer> getMenu() {
         try {
-            HashMap<String, Integer> orderMenu = View.getMenuOrder();
+            HashMap<String, Integer> orderMenu = view.getMenuOrder();
             return orderMenu;
         } catch (IllegalArgumentException e) {
-            View.printError(e.getMessage());
+            view.printError(e.getMessage());
             return getMenu();
         }
     }
 
     private HashMap<String, List<String>> getOrder(HashMap<String, Integer> orderMenu) {
         try {
-            HashMap<String, List<String>> orderResult = Order.order(orderMenu);
+            HashMap<String, List<String>> orderResult = order.order(orderMenu);
             return orderResult;
         } catch (IllegalArgumentException e) {
-            View.printError(e.getMessage());
+            view.printError(e.getMessage());
             return getOrder(getMenu());
         }
     }
