@@ -8,6 +8,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class OutputViewTest {
     static OutputView outputView = new OutputView();
@@ -34,10 +36,11 @@ class OutputViewTest {
     }
 
     @DisplayName("금액 출력 테스트")
-    @Test
-    void printMoneyTest() {
-        outputView.printMultipleLine(List.of(8500));
-        Assertions.assertThat(out.toString().trim()).contains("8,500원");
+    @ParameterizedTest()
+    @CsvSource(value = {"8500:8,500원", "10000:10,000원", "100000:100,000원", "1000000:1,000,000원"}, delimiterString = ":")
+    void printMoneyTest(int input, String expect) {
+        outputView.printMoney(input);
+        Assertions.assertThat(out.toString().trim()).contains(expect);
     }
 
 }
