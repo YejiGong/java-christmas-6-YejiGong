@@ -1,4 +1,4 @@
 package christmas.Model;
 
-public class ChampagnePresentationEvent {
+public class ChampagnePresentationEvent implements PresentationEvent {
 }

@@ -5,7 +5,8 @@ import static christmas.Global.Constants.MONEY_FORMATTER;
 public enum SubResultPhrase {
     MENU_VALUE_NUMBER("%s %d개"),
     MONEY_OUTPUT("%s원"),
-    BENEFIT_VALUE_NUMBER("%s 할인: -%s원"),
+    BENEFIT_VALUE_NUMBER("%s: -%s원"),
+
     DISCOUNT_MONEY_OUTPUT("-%s원");
     private final String phrase;
 

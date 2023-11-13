@@ -1,4 +1,4 @@
 package christmas.Model;
 
-public class WeekendDiscount {
+public class WeekendDiscount implements DiscountEvent {
 }

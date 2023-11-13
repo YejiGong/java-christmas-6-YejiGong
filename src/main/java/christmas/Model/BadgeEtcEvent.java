@@ -1,4 +1,4 @@
 package christmas.Model;
 
-public class BadgeEtcEvent {
+public class BadgeEtcEvent implements EtcEvent {
 }
