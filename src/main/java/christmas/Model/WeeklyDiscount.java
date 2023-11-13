@@ -3,7 +3,7 @@ package christmas.Model;
 import static christmas.Global.Constants.EVENT_CRITERIA_MONTH;
 import static christmas.Global.Constants.EVENT_CRITERIA_YEAR;
 import static christmas.Global.Constants.WEEKLY_EVENT_DISCOUNT_AMOUNT;
-import static christmas.Global.MenuType.DESSERT;
+import static christmas.Global.Constants.WEEKLY_EVENT_MENU_TYPE;
 
 import christmas.Global.Menu;
 import java.time.DayOfWeek;
@@ -31,7 +31,7 @@ public class WeeklyDiscount implements DiscountEvent {
 
     private int getDiscountAmount(HashMap<String, Integer> orderMenu) {
         int num = (int) orderMenu.keySet().stream().map(val -> Menu.valueOf(val).type)
-                .filter(val -> val.equals(DESSERT.name)).count();
+                .filter(val -> val.equals(WEEKLY_EVENT_MENU_TYPE)).count();
         return num * WEEKLY_EVENT_DISCOUNT_AMOUNT;
     }
 }

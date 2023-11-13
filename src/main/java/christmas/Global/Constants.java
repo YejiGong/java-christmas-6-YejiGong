@@ -1,5 +1,8 @@
 package christmas.Global;
 
+import static christmas.Global.MenuType.DESSERT;
+import static christmas.Global.MenuType.MAIN;
+
 import java.text.DecimalFormat;
 
 public class Constants {
@@ -15,5 +18,8 @@ public class Constants {
     public static final int CHRISTMAS_EVENT_DISCOUNT_AMOUNT = 100;
     public static final int EVENT_CRITERIA_YEAR = 2023;
     public static final int EVENT_CRITERIA_MONTH = 12;
+    public static final String WEEKLY_EVENT_MENU_TYPE = DESSERT.name;
     public static final int WEEKLY_EVENT_DISCOUNT_AMOUNT = 2023;
+    public static final String WEEKEND_EVENT_MENU_TYPE = MAIN.name;
+    public static final int WEEKEND_EVENT_DISCOUNT_AMOUNT = 2023;
 }
