@@ -8,5 +8,9 @@ public class Constants {
     public static final String INPUT_SPLIT_VALUE = ",";
     public static final String MENU_SPLIT_VALUE = "-";
     public static final int ORDER_LIMIT_VALUE = 20;
-    static final DecimalFormat MONEY_FORMATTER = new DecimalFormat("###,###");
+    public static final DecimalFormat MONEY_FORMATTER = new DecimalFormat("###,###");
+    public static final int CHRISTMAS_EVENT_PERIOD_START_DAY = 1;
+    public static final int CHRISTMAS_EVENT_PERIOD_END_DAY = 31;
+    public static final int CHRISTMAS_EVENT_BASE_AMOUNT = 1000;
+    public static final int CHRISTMAS_EVENT_DISCOUNT_AMOUNT = 100;
 }
