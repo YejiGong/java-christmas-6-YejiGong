@@ -13,4 +13,7 @@ public class Constants {
     public static final int CHRISTMAS_EVENT_PERIOD_END_DAY = 31;
     public static final int CHRISTMAS_EVENT_BASE_AMOUNT = 1000;
     public static final int CHRISTMAS_EVENT_DISCOUNT_AMOUNT = 100;
+    public static final int EVENT_CRITERIA_YEAR = 2023;
+    public static final int EVENT_CRITERIA_MONTH = 12;
+    public static final int WEEKLY_EVENT_DISCOUNT_AMOUNT = 2023;
 }
