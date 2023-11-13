@@ -5,9 +5,9 @@ import static christmas.Global.PrintPhrase.MENU_ORDER_INPUT_NOTICE;
 import static christmas.Global.PrintPhrase.RESULT_PREVIEW_OUTPUT;
 import static christmas.Global.PrintPhrase.VISIT_INPUT_NOTICE;
 
+import christmas.DTO.ResultDTO;
 import christmas.Global.ResultPhrase;
 import java.util.HashMap;
-import java.util.List;
 
 public class View {
     private InputView inputView;
@@ -32,11 +32,10 @@ public class View {
         return inputView.getMenuInput();
     }
 
-    public void printOrderResult(int date, HashMap<String, List<String>> orderResult) {
+    public void printOrderResult(int date, ResultDTO resultDTO) {
         outputView.print(RESULT_PREVIEW_OUTPUT.getPhrase(date));
         for (ResultPhrase rp : ResultPhrase.values()) {
-            outputView.print(rp.getPhrase());
-            outputView.printMultipleLine(orderResult.get(rp.getPhrase()));
+            outputView.print(rp.getPhrase(resultDTO));
         }
     }
 

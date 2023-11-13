@@ -1,9 +1,9 @@
 package christmas.Controller;
 
+import christmas.DTO.ResultDTO;
 import christmas.Model.Order;
 import christmas.View.View;
 import java.util.HashMap;
-import java.util.List;
 
 public class PlannerController {
 
@@ -19,7 +19,7 @@ public class PlannerController {
         view.putGreetings();
         int date = getDate();
         HashMap<String, Integer> orderMenu = getMenu();
-        HashMap<String, List<String>> orderResult = getOrder(date, orderMenu);
+        ResultDTO orderResult = getOrder(date, orderMenu);
         view.printOrderResult(date, orderResult);
     }
 
@@ -43,10 +43,10 @@ public class PlannerController {
         }
     }
 
-    private HashMap<String, List<String>> getOrder(int date, HashMap<String, Integer> orderMenu) {
+    private ResultDTO getOrder(int date, HashMap<String, Integer> orderMenu) {
         try {
-            HashMap<String, List<String>> orderResult = order.order(date, orderMenu);
-            return orderResult;
+            ResultDTO resultDTO = order.order(date, orderMenu);
+            return resultDTO;
         } catch (IllegalArgumentException e) {
             view.printError(e.getMessage());
             return getOrder(date, getMenu());

@@ -4,28 +4,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventsRegistry {
-    private static List<Class<? extends DiscountEvent>> discountEventRegistry = new ArrayList<>();
-    private static List<Class<? extends PresentationEvent>> presentationEventRegistry = new ArrayList<>();
-    private static List<Class<? extends EtcEvent>> etcEventRegistry = new ArrayList<>();
+    private static List<DiscountEvent> discountEventRegistry = new ArrayList<>();
+    private static List<PresentationEvent> presentationEventRegistry = new ArrayList<>();
+    private static List<EtcEvent> etcEventRegistry = new ArrayList<>();
 
     static {
-        discountEventRegistry.add(WeekendDiscount.class);
-        discountEventRegistry.add(WeeklyDiscount.class);
-        discountEventRegistry.add(ChristmasDiscount.class);
-        discountEventRegistry.add(SpecialDiscount.class);
-        presentationEventRegistry.add(ChampagnePresentationEvent.class);
-        etcEventRegistry.add(BadgeEtcEvent.class);
+        discountEventRegistry.add(new WeekendDiscount());
+        discountEventRegistry.add(new WeeklyDiscount());
+        discountEventRegistry.add(new ChristmasDiscount());
+        discountEventRegistry.add(new SpecialDiscount());
+        presentationEventRegistry.add(new ChampagnePresentationEvent());
+        etcEventRegistry.add(new BadgeEtcEvent());
     }
 
-    public List<Class<? extends DiscountEvent>> getDiscountEventRegistry() {
+    public List<DiscountEvent> getDiscountEventRegistry() {
         return discountEventRegistry;
     }
 
-    public List<Class<? extends PresentationEvent>> getPresentationEventRegistry() {
+    public List<PresentationEvent> getPresentationEventRegistry() {
         return presentationEventRegistry;
     }
 
-    public List<Class<? extends EtcEvent>> getEtcEventRegistry() {
+    public List<EtcEvent> getEtcEventRegistry() {
         return etcEventRegistry;
     }
 }

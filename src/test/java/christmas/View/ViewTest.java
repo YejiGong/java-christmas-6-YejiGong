@@ -3,26 +3,17 @@ package christmas.View;
 import static christmas.Global.PrintPhrase.GREETING;
 import static christmas.Global.PrintPhrase.MENU_ORDER_INPUT_NOTICE;
 import static christmas.Global.PrintPhrase.VISIT_INPUT_NOTICE;
-import static christmas.Global.ResultPhrase.AFTER_DISCOUNT_ORDER_PRICE;
-import static christmas.Global.ResultPhrase.BEFORE_DISCOUNT_ORDER_PRICE;
-import static christmas.Global.ResultPhrase.BENEFIT_INFORMATION;
-import static christmas.Global.ResultPhrase.EVENT_BADGE_INFORMATION;
-import static christmas.Global.ResultPhrase.ORDER_MENU;
-import static christmas.Global.ResultPhrase.PRESENT_MENU;
-import static christmas.Global.ResultPhrase.WHOLE_BENEFIT_PRICE;
-import static christmas.Global.SubResultPhrase.BENEFIT_VALUE_NUMBER;
-import static christmas.Global.SubResultPhrase.DISCOUNT_MONEY_OUTPUT;
-import static christmas.Global.SubResultPhrase.MENU_VALUE_NUMBER;
-import static christmas.Global.SubResultPhrase.MONEY_OUTPUT;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.DTO.ResultDTO;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -75,15 +66,9 @@ class ViewTest {
     @DisplayName("주문 결과 테스트")
     @Test
     void printOrderResultTest() {
-        HashMap<String, List<String>> result = new HashMap<>();
-        result.put(ORDER_MENU.getPhrase(), List.of(MENU_VALUE_NUMBER.getPhrase("티본스테이크", 1)));
-        result.put(BEFORE_DISCOUNT_ORDER_PRICE.getPhrase(), List.of(MONEY_OUTPUT.getPhraseMoney(142000)));
-        result.put(PRESENT_MENU.getPhrase(), List.of(MENU_VALUE_NUMBER.getPhrase("샴페인", 1)));
-        result.put(BENEFIT_INFORMATION.getPhrase(), List.of(BENEFIT_VALUE_NUMBER.getPhraseMoney("크리스마스 디데이", 1200)));
-        result.put(WHOLE_BENEFIT_PRICE.getPhrase(), List.of(DISCOUNT_MONEY_OUTPUT.getPhraseMoney(31246)));
-        result.put(AFTER_DISCOUNT_ORDER_PRICE.getPhrase(), List.of(MONEY_OUTPUT.getPhraseMoney(135754)));
-        result.put(EVENT_BADGE_INFORMATION.getPhrase(), List.of("산타"));
-        view.printOrderResult(26, result);
+        ResultDTO resultDTO = new ResultDTO(new HashMap<>(Map.of("티본스테이크", 1)), 142000, new HashMap<>(Map.of("샴페인", 1)),
+                new HashMap<>(Map.of("크리스마스 디데이 할인", 1200)), 31246, 135754, List.of("산타"));
+        view.printOrderResult(26, resultDTO);
         assertThat(out.toString().trim()).contains(
                 "<주문 메뉴>",
                 "티본스테이크 1개",

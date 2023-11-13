@@ -3,9 +3,10 @@ package christmas.Model;
 import static christmas.Global.Constants.ORDER_LIMIT_VALUE;
 import static christmas.Global.Exception.ILLEGAL_ORDER_INPUT;
 import static christmas.Global.MenuType.DRINK;
-import static christmas.Global.ResultPhrase.BEFORE_DISCOUNT_ORDER_PRICE;
-import static christmas.Global.SubResultPhrase.MONEY_OUTPUT;
 
+import christmas.DTO.ResultDTO;
+import christmas.Domain.EventResult;
+import christmas.Domain.Result;
 import christmas.Global.Menu;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -14,20 +15,27 @@ import java.util.stream.Collectors;
 
 public class Order {
     private EventChecker eventChecker;
+    private Result result;
 
     public Order(EventChecker eventChecker) {
         this.eventChecker = eventChecker;
+        result = new Result();
     }
 
-    public HashMap<String, List<String>> order(int date, HashMap<String, Integer> orderMenu) {
+    public ResultDTO order(int date, HashMap<String, Integer> orderMenu) {
         if (!isValidOrder(orderMenu)) {
             throw new IllegalArgumentException(ILLEGAL_ORDER_INPUT.getPhrase());
         }
-        HashMap<String, List<String>> result = new HashMap<>();
-        int priceSumOfOrder = getSumOfOrder(orderMenu);
-        result.put(BEFORE_DISCOUNT_ORDER_PRICE.getPhrase(), List.of(MONEY_OUTPUT.getPhraseMoney(priceSumOfOrder)));
-        result.putAll(eventChecker.eventCheck(date, priceSumOfOrder, orderMenu));
-        return result;
+        for (String menu : orderMenu.keySet()) {
+            result.putOrderMenu(menu, orderMenu.get(menu));
+        }
+        result.addBeforeDiscountOrderPrice(getSumOfOrder(orderMenu));
+        EventResult eventResult = eventChecker.eventCheck(date, result);
+        ResultDTO resultDTO = new ResultDTO(new HashMap<>(result.getOrderMenu()), result.getBeforeDiscountOrderPrice(),
+                new HashMap<>(eventResult.getPresentMenu()), new HashMap<>(eventResult.getBenefitInformation()),
+                eventResult.getWholeBenefitPrice(),
+                eventResult.getAfterDiscountOrderPrice(), eventResult.getEventBadge());
+        return resultDTO;
     }
 
     private Boolean isValidOrder(HashMap<String, Integer> orderMenu) {
