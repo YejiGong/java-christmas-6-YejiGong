@@ -2,6 +2,7 @@ package christmas.Controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.Model.EventChecker;
 import christmas.Model.EventsRegistry;
 import christmas.Model.Order;
@@ -12,6 +13,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -22,13 +25,23 @@ class PlannerControllerTest {
     static OutputStream out;
     static PlannerController plannerController = new PlannerController(view, order);
 
+
+    @BeforeEach
+    void setUp() {
+        out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+    }
+
+    @AfterEach
+    void cleanUp() {
+        Console.close();
+    }
+
     @DisplayName("정상적인 주문")
     @Test
     void LegalOrder() {
         System.setIn(new ByteArrayInputStream("26\n타파스-1\n제로콜라-1".getBytes()));
         plannerController.run();
-        out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
         assertThat(out.toString().trim()).contains(
                 "<주문 메뉴>",
                 "<할인 전 총주문 금액>",
@@ -45,8 +58,6 @@ class PlannerControllerTest {
     void IllegalOrder() {
         System.setIn(new ByteArrayInputStream("39\n27\n타파스-1\n제로콜라-1".getBytes()));
         plannerController.run();
-        out = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(out));
         assertThat(out.toString().trim()).contains(
                 "[ERROR]",
                 "<주문 메뉴>",

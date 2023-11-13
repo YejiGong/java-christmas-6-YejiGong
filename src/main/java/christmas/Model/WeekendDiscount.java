@@ -30,8 +30,8 @@ public class WeekendDiscount implements DiscountEvent {
     }
 
     private int getDiscountAmount(HashMap<String, Integer> orderMenu) {
-        int num = (int) orderMenu.keySet().stream().map(val -> Menu.valueOf(val).type)
-                .filter(val -> val.equals(WEEKEND_EVENT_MENU_TYPE)).count();
+        int num = orderMenu.keySet().stream().filter(val -> Menu.valueOf(val).type.equals(WEEKEND_EVENT_MENU_TYPE))
+                .mapToInt(val -> orderMenu.get(val)).sum();
         return num * WEEKEND_EVENT_DISCOUNT_AMOUNT;
     }
 }

@@ -23,7 +23,7 @@ public class ChristmasDiscount implements DiscountEvent {
     }
 
     private Boolean checkInEventPeriod(int date) {
-        return date >= CHRISTMAS_EVENT_PERIOD_START_DAY && CHRISTMAS_EVENT_PERIOD_END_DAY <= date;
+        return date >= CHRISTMAS_EVENT_PERIOD_START_DAY && CHRISTMAS_EVENT_PERIOD_END_DAY >= date;
     }
 
     private int getDiscountAmount(int date) {

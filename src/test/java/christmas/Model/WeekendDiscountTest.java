@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class WeekendDiscountTest {
 
-    static WeekendDiscount weekendDiscount;
+    static WeekendDiscount weekendDiscount = new WeekendDiscount();
 
     @DisplayName("이름_출력_테스트")
     @Test

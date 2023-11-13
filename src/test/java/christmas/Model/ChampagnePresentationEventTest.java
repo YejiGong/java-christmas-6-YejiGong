@@ -8,12 +8,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ChampagnePresentationEventTest {
-    static ChampagnePresentationEvent champagnePresentationEvent;
+    static ChampagnePresentationEvent champagnePresentationEvent = new ChampagnePresentationEvent();
 
     @DisplayName("이름_출력_테스트")
     @Test
     void getNameTest() {
-        assertThat(champagnePresentationEvent.getName()).isEqualTo("주말 할인");
+        assertThat(champagnePresentationEvent.getName()).isEqualTo("증정 이벤트");
     }
 
     @DisplayName("할인_금액_테스트")

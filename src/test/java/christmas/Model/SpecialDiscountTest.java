@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 
 class SpecialDiscountTest {
 
-    static SpecialDiscount specialDiscount;
+    static SpecialDiscount specialDiscount = new SpecialDiscount();
 
     @DisplayName("이름_출력_테스트")
     @Test

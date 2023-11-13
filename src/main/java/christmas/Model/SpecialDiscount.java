@@ -10,7 +10,7 @@ public class SpecialDiscount implements DiscountEvent {
 
     @Override
     public String getName() {
-        return null;
+        return "특별 할인";
     }
 
     @Override

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class ChristmasDiscountTest {
-    static ChristmasDiscount christmasDiscount;
+    static ChristmasDiscount christmasDiscount = new ChristmasDiscount();
 
     @DisplayName("이름_출력_테스트")
     @Test

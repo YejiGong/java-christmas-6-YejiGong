@@ -26,12 +26,12 @@ public class WeeklyDiscount implements DiscountEvent {
 
     private boolean checkInEvent(int date) {
         DayOfWeek day = LocalDate.of(EVENT_CRITERIA_YEAR, EVENT_CRITERIA_MONTH, date).getDayOfWeek();
-        return day.compareTo(DayOfWeek.SUNDAY) >= 0 && day.compareTo(DayOfWeek.THURSDAY) <= 0;
+        return day.compareTo(DayOfWeek.SUNDAY) == 0 || day.compareTo(DayOfWeek.THURSDAY) <= 0;
     }
 
     private int getDiscountAmount(HashMap<String, Integer> orderMenu) {
-        int num = (int) orderMenu.keySet().stream().map(val -> Menu.valueOf(val).type)
-                .filter(val -> val.equals(WEEKLY_EVENT_MENU_TYPE)).count();
+        int num = orderMenu.keySet().stream().filter(val -> Menu.valueOf(val).type.equals(WEEKLY_EVENT_MENU_TYPE))
+                .mapToInt(val -> orderMenu.get(val)).sum();
         return num * WEEKLY_EVENT_DISCOUNT_AMOUNT;
     }
 }

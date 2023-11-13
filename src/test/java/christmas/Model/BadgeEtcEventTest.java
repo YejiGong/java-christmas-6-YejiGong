@@ -6,7 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class BadgeEtcEventTest {
-    static BadgeEtcEvent badgeEtcEvent;
+    static BadgeEtcEvent badgeEtcEvent = new BadgeEtcEvent();
 
     @DisplayName("할인_금액_테스트")
     @Test
