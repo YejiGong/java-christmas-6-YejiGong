@@ -22,4 +22,5 @@ public class Constants {
     public static final int WEEKLY_EVENT_DISCOUNT_AMOUNT = 2023;
     public static final String WEEKEND_EVENT_MENU_TYPE = MAIN.name;
     public static final int WEEKEND_EVENT_DISCOUNT_AMOUNT = 2023;
+    public static final int SPECIAL_EVENT_DISCOUNT_AMOUNT = 1000;
 }
