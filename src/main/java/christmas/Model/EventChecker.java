@@ -1,5 +1,7 @@
 package christmas.Model;
 
+import static christmas.Global.Constants.EVENT_MINIMUM_PRICE;
+
 import christmas.Domain.EventResult;
 import christmas.Domain.Result;
 import java.util.HashMap;
@@ -16,14 +18,21 @@ public class EventChecker {
 
 
     public EventResult eventCheck(int date, Result result) {
-        checkBenefitAvailableEvent(date, result.getBeforeDiscountOrderPrice(), new HashMap<>(result.getOrderMenu()));
+        if (checkEventAvailable(result.getBeforeDiscountOrderPrice())) {
+            checkBenefitAvailableEvent(date, result.getBeforeDiscountOrderPrice(),
+                    new HashMap<>(result.getOrderMenu()));
+        }
         return eventResult;
+    }
+
+    private Boolean checkEventAvailable(int sumOfPrice) {
+        return sumOfPrice >= EVENT_MINIMUM_PRICE;
     }
 
     private void checkBenefitAvailableEvent(int date, int sumOfPrice, HashMap<String, Integer> orderMenu) {
         checkDiscountEvent(date, orderMenu);
-        checkPresentationEvent(date, orderMenu);
-        checkEtcEvent(date, sumOfPrice);
+        checkPresentationEvent(sumOfPrice, orderMenu);
+        checkEtcEvent(eventResult.getWholeBenefitPrice());
     }
 
     private void checkDiscountEvent(int date, HashMap<String, Integer> orderMenu) {
@@ -36,10 +45,10 @@ public class EventChecker {
         }
     }
 
-    private void checkPresentationEvent(int date, HashMap<String, Integer> orderMenu) {
+    private void checkPresentationEvent(int sumOfPrice, HashMap<String, Integer> orderMenu) {
         List<PresentationEvent> presentationEvents = eventsRegistry.getPresentationEventRegistry();
         for (PresentationEvent event : presentationEvents) {
-            int discountResult = event.getEventResult(date, orderMenu);
+            int discountResult = event.getEventResult(sumOfPrice, orderMenu);
             if (discountResult > 0) {
                 eventResult.putPresentMenu(event.getPresentName(), discountResult);
                 eventResult.putBenefitInformation(event.getName(), discountResult * event.getPresentPrice());
@@ -49,10 +58,13 @@ public class EventChecker {
         }
     }
 
-    private void checkEtcEvent(int date, int sumOfPrice) {
+    private void checkEtcEvent(int benefitPrice) {
         List<EtcEvent> etcEvents = eventsRegistry.getEtcEventRegistry();
         for (EtcEvent event : etcEvents) {
-            eventResult.addEventBadge(event.getEventResult(date, sumOfPrice));
+            String result = event.getEventResult(benefitPrice);
+            if (!result.isEmpty()) {
+                eventResult.addEventBadge(result);
+            }
         }
     }
 }
