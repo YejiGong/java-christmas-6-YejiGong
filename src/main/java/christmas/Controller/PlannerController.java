@@ -19,7 +19,7 @@ public class PlannerController {
         view.putGreetings();
         int date = getDate();
         HashMap<String, Integer> orderMenu = getMenu();
-        HashMap<String, List<String>> orderResult = getOrder(orderMenu);
+        HashMap<String, List<String>> orderResult = getOrder(date, orderMenu);
         view.printOrderResult(date, orderResult);
     }
 
@@ -43,13 +43,13 @@ public class PlannerController {
         }
     }
 
-    private HashMap<String, List<String>> getOrder(HashMap<String, Integer> orderMenu) {
+    private HashMap<String, List<String>> getOrder(int date, HashMap<String, Integer> orderMenu) {
         try {
-            HashMap<String, List<String>> orderResult = order.order(orderMenu);
+            HashMap<String, List<String>> orderResult = order.order(date, orderMenu);
             return orderResult;
         } catch (IllegalArgumentException e) {
             view.printError(e.getMessage());
-            return getOrder(getMenu());
+            return getOrder(date, getMenu());
         }
     }
 }

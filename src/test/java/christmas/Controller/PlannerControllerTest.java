@@ -2,7 +2,10 @@ package christmas.Controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import christmas.Model.EventChecker;
 import christmas.Model.Order;
+import christmas.View.InputView;
+import christmas.View.OutputView;
 import christmas.View.View;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,7 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class PlannerControllerTest {
-    
+
     static View view = new View(new InputView(), new OutputView());
     static Order order = new Order(new EventChecker());
     static OutputStream out;

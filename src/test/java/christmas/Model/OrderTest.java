@@ -28,8 +28,8 @@ class OrderTest {
         orderMenu.put("바비큐립", 1);
         orderMenu.put("초코케이크", 2);
         orderMenu.put("제로콜라", 1);
-        HashMap<String, List<String>> result = order.order(orderMenu);
-        assertThat(order.keySet()).contains(ORDER_MENU.getPhrase(), BEFORE_DISCOUNT_ORDER_PRICE.getPhrase(),
+        HashMap<String, List<String>> result = order.order(26, orderMenu);
+        assertThat(result.keySet()).contains(ORDER_MENU.getPhrase(), BEFORE_DISCOUNT_ORDER_PRICE.getPhrase(),
                 PRESENT_MENU.getPhrase(), BENEFIT_INFORMATION.getPhrase(),
                 WHOLE_BENEFIT_PRICE.getPhrase(), AFTER_DISCOUNT_ORDER_PRICE.getPhrase(),
                 EVENT_BADGE_INFORMATION.getPhrase());
@@ -42,7 +42,7 @@ class OrderTest {
     void illegalOrderTest() {
         HashMap<String, Integer> orderMenu = new HashMap<>();
         orderMenu.put("티본스테이크", 21);
-        assertThatThrownBy(() -> order.order(orderMenu))
+        assertThatThrownBy(() -> order.order(26, orderMenu))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(ILLEGAL_ORDER_INPUT.getPhrase());
     }
