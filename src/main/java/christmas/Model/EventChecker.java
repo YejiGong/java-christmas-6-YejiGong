@@ -40,8 +40,11 @@ public class EventChecker {
         List<PresentationEvent> presentationEvents = eventsRegistry.getPresentationEventRegistry();
         for (PresentationEvent event : presentationEvents) {
             int discountResult = event.getEventResult(date, orderMenu);
-            eventResult.putBenefitInformation(event.getName(), discountResult);
-            eventResult.addWholeBenefitPrice(discountResult);
+            if (discountResult > 0) {
+                eventResult.putPresentMenu(event.getPresentName(), discountResult);
+                eventResult.putBenefitInformation(event.getName(), discountResult * event.getPresentPrice());
+                eventResult.addWholeBenefitPrice(discountResult * event.getPresentPrice());
+            }
 
         }
     }
