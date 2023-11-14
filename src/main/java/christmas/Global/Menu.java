@@ -16,7 +16,7 @@ public enum Menu {
     초코케이크(DESSERT.name, 15000),
     아이스크림(DESSERT.name, 5000),
     제로콜라(DRINK.name, 3000),
-    레드와인(DRINK.name, 25000),
+    레드와인(DRINK.name, 60000),
     샴페인(DRINK.name, 25000);
 
     public final String type;

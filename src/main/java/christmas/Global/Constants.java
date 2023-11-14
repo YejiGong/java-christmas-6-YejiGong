@@ -14,7 +14,7 @@ public class Constants {
     public static final DecimalFormat MONEY_FORMATTER = new DecimalFormat("###,###");
     public static final int EVENT_MINIMUM_PRICE = 10000;
     public static final int CHRISTMAS_EVENT_PERIOD_START_DAY = 1;
-    public static final int CHRISTMAS_EVENT_PERIOD_END_DAY = 31;
+    public static final int CHRISTMAS_EVENT_PERIOD_END_DAY = 25;
     public static final int CHRISTMAS_EVENT_BASE_AMOUNT = 1000;
     public static final int CHRISTMAS_EVENT_DISCOUNT_AMOUNT = 100;
     public static final int EVENT_CRITERIA_YEAR = 2023;

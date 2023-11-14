@@ -52,9 +52,10 @@ class InputViewTest {
 
     @DisplayName("비정상_메뉴_입력_테스트")
     @ParameterizedTest
-    @ValueSource(strings = {"타파스-1*", "타파스-19;콜라-10", "타파스19,콜라100", "100", "\n", "타파스-19,타파스-11"})
+    @ValueSource(strings = {"타파스-1*", "타파스-19;콜라-10", "타파스19,콜라100", "100", "\n", "타파스-19,타파스-11", "타파스-1;샴페인-1",
+            "타파스-1,타파스-1"})
     void getIllegalMenuInput(String text) {
-        System.setIn(new ByteArrayInputStream("text".getBytes()));
+        System.setIn(new ByteArrayInputStream(text.getBytes()));
         assertThatThrownBy(() -> inputView.getMenuInput())
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage(Exception.ILLEGAL_ORDER_INPUT.getPhrase());

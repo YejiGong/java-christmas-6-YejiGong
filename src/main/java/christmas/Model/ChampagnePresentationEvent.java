@@ -23,7 +23,6 @@ public class ChampagnePresentationEvent implements PresentationEvent {
 
     @Override
     public int getEventResult(int amount, HashMap<String, Integer> orderMenu) {
-        ;
         if (isTargetOfEvent(amount)) {
             return getPresentationMenuAmount(amount);
         }

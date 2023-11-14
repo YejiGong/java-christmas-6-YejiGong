@@ -33,8 +33,8 @@ public class Order {
         EventResult eventResult = eventChecker.eventCheck(date, result);
         ResultDTO resultDTO = new ResultDTO(new HashMap<>(result.getOrderMenu()), result.getBeforeDiscountOrderPrice(),
                 new HashMap<>(eventResult.getPresentMenu()), new HashMap<>(eventResult.getBenefitInformation()),
-                eventResult.getWholeBenefitPrice(),
-                eventResult.getAfterDiscountOrderPrice(), eventResult.getEventBadge());
+                eventResult.getWholeBenefitPrice(), eventResult.getAfterDiscountOrderPrice(),
+                eventResult.getEventBadge());
         return resultDTO;
     }
 

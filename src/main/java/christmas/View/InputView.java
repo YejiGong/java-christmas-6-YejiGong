@@ -49,7 +49,7 @@ public class InputView {
     }
 
     private Boolean isValidMenusInput(String input) {
-        return input.split(INPUT_SPLIT_VALUE).length > 1 || input.split(INPUT_SPLIT_VALUE)[0].equals(input);
+        return input.split(INPUT_SPLIT_VALUE).length > 1 || isValidMenuNumberPairInput(input);
     }
 
     private HashMap<String, Integer> getMenuValue(List<String> splitMenus) {

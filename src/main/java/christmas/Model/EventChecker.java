@@ -54,7 +54,6 @@ public class EventChecker {
                 eventResult.putBenefitInformation(event.getName(), discountResult * event.getPresentPrice());
                 eventResult.addWholeBenefitPrice(discountResult * event.getPresentPrice());
             }
-
         }
     }
 

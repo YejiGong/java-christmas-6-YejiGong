@@ -17,6 +17,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 class PlannerControllerTest {
 
@@ -54,9 +56,10 @@ class PlannerControllerTest {
     }
 
     @DisplayName("비정상적인 주문")
-    @Test
-    void IllegalOrder() {
-        System.setIn(new ByteArrayInputStream("39\n27\n타파스-1\n제로콜라-1".getBytes()));
+    @ParameterizedTest
+    @ValueSource(strings = {"39\n27\n타파스-1\n제로콜라-1", "27\n타파스-21\n타파스-1", "27\n재로콜라-1\n제로콜라-1\n타파스-1"})
+    void IllegalOrder(String text) {
+        System.setIn(new ByteArrayInputStream(text.getBytes()));
         plannerController.run();
         assertThat(out.toString().trim()).contains(
                 "[ERROR]",
