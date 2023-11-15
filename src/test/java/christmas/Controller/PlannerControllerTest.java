@@ -57,7 +57,7 @@ class PlannerControllerTest {
 
     @DisplayName("비정상적인 주문")
     @ParameterizedTest
-    @ValueSource(strings = {"39\n27\n타파스-1\n제로콜라-1", "27\n타파스-21\n타파스-1", "27\n재로콜라-1\n제로콜라-1\n타파스-1"})
+    @ValueSource(strings = {"39\n27\n제로콜라-1\n타파스-1", "27\n타파스-21\n타파스-1", "27\n재로콜라-1\n제로콜라-1\n타파스-1"})
     void IllegalOrder(String text) {
         System.setIn(new ByteArrayInputStream(text.getBytes()));
         plannerController.run();
